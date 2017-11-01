@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>联动表单</title>
+	<style type="text/css">
+		.notSchool {
+			display: none;
+		}
+	</style>
+
+</head>
+<body>
+	<input type="radio" name="1" checked="checked"><span>在校学生</span>
+	<input type="radio" name="1"><span>非在校生</span>
+	<div id="school">
+		<span>学校</span>
+		<select id="address">
+			<option>北京</option>
+			<option>上海</option>
+			<option>马鞍山</option>
+		</select>
+		<select id="schoolName">
+			<option>北京大学</option>
+			<option>北京工商大学</option>
+			<option>清华大学</option>
+		</select>
+	</div>
+	<div id="nSchool" class="notSchool">
+		<span>就业单位</span>
+		<input type="text" name="2">
+	</div>
+
+	<script type="text/javascript">
+		var list = [
+					["北京大学","北京工商大学","清华大学"],
+					["上海大学","复旦大学","上海交通大学","上海工商大学"],
+					["安徽工业大学工商学院","马鞍山师范","七零大学"]
+					]
+		var chose = document.getElementsByTagName('input');
+		var chssOne = document.getElementById('school');
+		var chssTwo = document.getElementById('nSchool');
+		var selectAddress = document.getElementById('address');
+		var selecScloolName = document.getElementById('schoolName');
+		var optionAddress = selectAddress.getElementsByTagName('option');
+		//var optionSchoolName = selecScloolName.getElementsByTagName('option');
+		//按钮选项
+		chose[0].onclick = function (argument) {
+			// body...
+			chssOne.style.display = "block";
+			chssTwo.style.display = "none";
+		}
+		chose[1].onclick = function (argument) {
+			// body...
+			chssOne.style.display = "none";
+			chssTwo.style.display = "block";
+		}
+		//地区匹配学校
+		function addressShow () {
+			//for (var j = 0; j < optionAddress.length; j++) {
+
+				selectAddress.onchange = function(){
+						// body...
+						var num = selectAddress.selectedIndex;
+						selecScloolName.options.length = 0;//这里学习了简单的清空方法
+						// for (var i = selecScloolName.length-1; i > -1 ; i--) {
+						// 	selecScloolName.remove(0);
+						// }
+						for (var i = 0; i < list[num].length; i++) {
+							// var Sum = list[num][i];
+							// console.log(Sum);
+							// selecScloolName.add(new Option("+Sum+"));这里想传变量进入，失败
+							var slct = document.createElement("option");
+							slct.text = list[num][i];
+							selecScloolName.appendChild(slct);
+						}
+					}
+
+
+				//optionAddress[op].onfocus = 
+				}
+
+			
+		
+		addressShow();
+	</script>
+</body>
+</html>
